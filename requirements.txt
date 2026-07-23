@@ -1,0 +1,4 @@
+# Runtime dependencies.
+# The importer relies only on the Python 3.11+ standard library
+# (csv, json, logging, argparse, dataclasses), so there are no
+# third-party runtime requirements.

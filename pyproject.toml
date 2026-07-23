@@ -1,0 +1,67 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "data-importer"
+version = "0.1.0"
+description = "Resilient CLI tool that imports user data from CSV into a JSON store."
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [{ name = "Jordan" }]
+dependencies = []
+
+[project.scripts]
+data-importer = "data_importer.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+# ---------------------------------------------------------------------------
+# Tooling configuration
+# ---------------------------------------------------------------------------
+
+[tool.black]
+line-length = 88
+target-version = ["py311"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py311"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "UP", "B", "D"]
+ignore = [
+    "D203",  # incompatible with D211 (no blank line before class docstring)
+    "D213",  # incompatible with D212 (multi-line summary on first line)
+    "D107",  # __init__ args documented in the class docstring (Google style)
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["D"]  # docstrings not required in tests
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+warn_unused_configs = true
+files = ["src", "tests"]
+
+[tool.pytest.ini_options]
+addopts = "-ra --strict-markers"
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[tool.coverage.run]
+source = ["data_importer"]
+branch = true
+# The __main__ shim is exercised end-to-end by a subprocess test, which the
+# parent process's coverage cannot observe.
+omit = ["*/__main__.py"]
+
+[tool.coverage.report]
+show_missing = true
+fail_under = 90
