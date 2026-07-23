@@ -58,6 +58,9 @@ pythonpath = ["."]
 [tool.coverage.run]
 source = ["data_importer"]
 branch = true
+# The __main__ shim is exercised end-to-end by a subprocess test, which the
+# parent process's coverage cannot observe.
+omit = ["*/__main__.py"]
 
 [tool.coverage.report]
 show_missing = true
