@@ -16,4 +16,6 @@ repos:
     rev: v1.11.2
     hooks:
       - id: mypy
-        additional_dependencies: []
+        # Give the isolated hook env the type information it needs to check the
+        # test suite (pytest decorators) the same way a local mypy run does.
+        additional_dependencies: [pytest]
