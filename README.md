@@ -5,6 +5,10 @@ JSON-backed store. It is **resilient**: missing files and malformed headers abor
 cleanly with a clear error, while individual bad rows (invalid data or duplicate
 users) are logged and skipped so a single error never aborts the whole import.
 
+## Demo
+
+Watch a walkthrough of the tool: [Video demo on Loom](https://www.loom.com/share/715a6fa85bb84d43b8087dff874de3f5)
+
 ## Features
 
 - Imports `user_id, name, email` rows from a CSV into a JSON "database"
@@ -101,7 +105,22 @@ black . && ruff check . && mypy          # format, lint, type-check
 pre-commit run --all-files               # run every hook
 ```
 
-A text coverage report is kept at [`coverage.txt`](coverage.txt); regenerate the
+### Coverage summary
+
+| Module | Stmts | Miss | Branch | BrPart | Cover |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| `src/data_importer/__init__.py` | 1 | 0 | 0 | 0 | 100% |
+| `src/data_importer/cli.py` | 36 | 0 | 0 | 0 | 100% |
+| `src/data_importer/exceptions.py` | 15 | 0 | 0 | 0 | 100% |
+| `src/data_importer/importer.py` | 45 | 0 | 4 | 0 | 100% |
+| `src/data_importer/logging_config.py` | 6 | 0 | 0 | 0 | 100% |
+| `src/data_importer/models.py` | 31 | 0 | 6 | 0 | 100% |
+| `src/data_importer/parser.py` | 32 | 0 | 6 | 0 | 100% |
+| `src/data_importer/repository.py` | 56 | 0 | 12 | 0 | 100% |
+| `src/data_importer/validation.py` | 14 | 0 | 0 | 0 | 100% |
+| **TOTAL** | **236** | **0** | **28** | **0** | **100%** |
+
+The full text report is kept at [`coverage.txt`](coverage.txt); regenerate the
 HTML report with `pytest --cov --cov-report=html` (written to `htmlcov/`).
 
 ## Project structure
